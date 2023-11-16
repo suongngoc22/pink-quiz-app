@@ -25,7 +25,6 @@ const quizData = [
     }
 ];
 
-
 const quiz = document.getElementById("quiz-container");
 const quiz_count = document.getElementById("quiz-count");
 
@@ -49,17 +48,13 @@ const quizDataChosen = [];
 loadQuiz();
 
 function loadQuiz() {
-    quiz_count.innerText = `${currentQuiz + 1}/${quizData.length}`
+    quiz_count.innerText = `${currentQuiz + 1}/${quizData.length}`;
 
     questionEl.innerText = quizData[currentQuiz].question;
     a_text.innerText = quizData[currentQuiz].a;
     b_text.innerText = quizData[currentQuiz].b;
     c_text.innerText = quizData[currentQuiz].c;
     d_text.innerText = quizData[currentQuiz].d;
-
-    if ((currentQuiz + 1) === quizData.length) {
-        document.querySelector("#submit").innerText = 'Submit';
-    }
 }
 
 function getSelectedAnswer() {
@@ -77,10 +72,8 @@ function getSelectedAnswer() {
 radioButtons.forEach((radioButton) => {
     radioButton.addEventListener("change", () => {
         quizDataChosen[currentQuiz] = radioButton.id;
-        console.log(radioButton.id);
-        console.log(quizDataChosen);
-    })
-})
+    });
+});
 
 function deselectAnswers() {
     answerEls.forEach((answerEl) => {
@@ -127,7 +120,7 @@ submitBtn.addEventListener("click", () => {
     } else {
         alert("Chọn đi");
     }
-})
+});
 
 previousBtn.addEventListener("click", () => {
     if (currentQuiz > 0) {
@@ -135,5 +128,5 @@ previousBtn.addEventListener("click", () => {
         loadQuiz();
         deselectAnswers();
     }
-})
+});
 
