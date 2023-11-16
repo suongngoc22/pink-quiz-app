@@ -61,18 +61,6 @@ function loadQuiz() {
     d_text.innerText = quizData[currentQuiz].d;
 }
 
-function getSelectedAnswer() {
-    let answer = undefined;
-
-    answerEls.forEach((answerEl) => {
-        if (answerEl.checked) {
-            answer = answerEl.id
-        }
-    });
-
-    return answer;
-}
-
 const getSavedAnswer = (key) => {
     return savedAnswer[key];
 }
@@ -95,14 +83,14 @@ function deselectAnswers() {
     answerEls.forEach((answerEl) => {
         answerEl.checked = false;
 
-        if (answerEl.id === getSavedAnswer(currentQuiz)) {
+        if (answerEl.id === getSavedAnswer(quizData[currentQuiz].id)) {
             answerEl.checked = true;
         }
     });
 }
 
 submitBtn.addEventListener("click", () => {
-    const answer = getSelectedAnswer();
+    const answer = getSavedAnswer(quizData[currentQuiz].id);
     
     if (answer) {
         currentQuiz++;
@@ -111,8 +99,8 @@ submitBtn.addEventListener("click", () => {
             loadQuiz();
             deselectAnswers();
         } else {
-            quizData.forEach((item, index) => {
-                if (item.correct === savedAnswer[index])
+            quizData.forEach((quiz) => {
+                if (quiz.correct === getSavedAnswer(quiz.id))
                     score++;
             });
 
