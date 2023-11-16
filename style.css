@@ -26,7 +26,13 @@ body {
 }
 
 .quiz-header {
-    padding: 3rem;
+    padding-top: 3rem;
+    padding-inline: 3rem;
+}
+
+.quiz-count {
+    text-align: center;
+    margin: 0;
 }
 
 .quiz-score {
@@ -47,6 +53,19 @@ ul li {
 
 ul li label {
     cursor: pointer;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-block: 1rem;
+}
+
+.pagination img {
+    cursor: pointer;
+    width: 30px;
 }
 
 button {
