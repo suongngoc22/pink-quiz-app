@@ -83,12 +83,24 @@ submitBtn.addEventListener("click", () => {
         if (currentQuiz < quizData.length) {
             loadQuiz();
         } else {
-            quiz.innerHTML = `
+            if (scrore === quizData.length) {
+                quiz.innerHTML = `
                 <div class="quiz-score">
-                    <h2>Điểm của bạn: ${scrore}/${quizData.length}</h2>
+                    <h2>🎉🎉 Điểm của bạn: ${scrore}/${quizData.length} 🎉🎉</h2>
+                    <button onclick="location.reload()"> Quay lại </button>
                 </div>
-                <button onclick="location.reload()"> Xem đáp án ko dc đâu làm lại thui >>></button>
-            `
+                `
+            } else {
+                quiz.innerHTML = `
+                    <div class="quiz-score">
+                        <h2>💣💣 Điểm của bạn: ${scrore}/${quizData.length}  💣💣</h2>
+                    </div>
+                    <button onclick="location.reload()"> Xem đáp án ko dc đâu làm lại thui >>></button>
+                `
+            }
+
         }
+    } else {
+        alert("Chọn đi");
     }
 })
