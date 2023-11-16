@@ -1,5 +1,6 @@
 const quizData = [
     {
+        id: 1001,
         question: 'Hoa nào mà em thíck ?',
         a: '🌹🌹🌹🌹',
         b: '🌻🌻🌻🌻',
@@ -8,6 +9,7 @@ const quizData = [
         correct: 'd'
     },
     {
+        id: 2003213122,
         question: '"Ăn" cái nào bây giờ ??',
         a: '🍰 (cake)',
         b: '🥤 (bubble tea)',
@@ -16,6 +18,7 @@ const quizData = [
         correct: 'b'
     },
     {
+        id: 30034323,
         question: 'How much do you love me ❤️',
         a: 'Khum bít',
         b: 'Mụt chút (-_-)',
@@ -43,7 +46,8 @@ const previousBtn = document.getElementById("previous");
 let currentQuiz = 0;
 let score = 0;
 
-const quizDataChosen = [];
+let savedAnswer = {};
+quizData.forEach(quiz => savedAnswer[quiz.id] = null);
 
 loadQuiz();
 
@@ -69,9 +73,21 @@ function getSelectedAnswer() {
     return answer;
 }
 
+const getSavedAnswer = (key) => {
+    return savedAnswer[key];
+}
+
+const setSavedAnswer = (key, value) => {
+    savedAnswer = {
+        ...savedAnswer,
+        [key]: value
+    };
+}
+
 radioButtons.forEach((radioButton) => {
     radioButton.addEventListener("change", () => {
-        quizDataChosen[currentQuiz] = radioButton.id;
+        setSavedAnswer(quizData[currentQuiz].id, radioButton.id);
+        console.log(savedAnswer);
     });
 });
 
@@ -79,7 +95,7 @@ function deselectAnswers() {
     answerEls.forEach((answerEl) => {
         answerEl.checked = false;
 
-        if (answerEl.id === quizDataChosen[currentQuiz]) {
+        if (answerEl.id === getSavedAnswer(currentQuiz)) {
             answerEl.checked = true;
         }
     });
@@ -96,7 +112,7 @@ submitBtn.addEventListener("click", () => {
             deselectAnswers();
         } else {
             quizData.forEach((item, index) => {
-                if (item.correct === quizDataChosen[index])
+                if (item.correct === savedAnswer[index])
                     score++;
             });
 
